@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+// each class is defined in each own file, inside a common package
+option java_multiple_files = true;
+option java_package = "tpFinalService";
+
+package tpFinalService; // package do proto
+
+service tpService {
+  //client to server
+  rpc sendFileBlocks(stream Content) returns(StoredContentID);
+  //server to client
+  rpc getMetadata(StoredContentID) returns(FileMetadata);
+  rpc getAllDocsInCollection(Void) returns(stream StoredContentID);
+  rpc getImageLabelsFromCloud(StoredContentID) returns(Labels);
+  rpc searchImageByLabelAndData(QueryMessage) returns(stream StoredContentID);
+}
+
+message Void {}
+
+message Content {
+  bytes fileBlockBytes = 1;
+  string filename = 2;
+  string contentType = 3;
+}
+
+message StoredContentID {
+  string identifier = 1;
+}
+
+
+
+
+
+message FileMetadata{
+  string identifier = 1;
+  string filename = 2;
+  string containerBucket = 3;
+  string contentType = 4;
+  Labels labels = 5;
+}
+message Labels{
+  repeated string labels = 1;
+  string language = 2;
+}
+
+message QueryMessage{
+  oneof labels{
+    string label_unique = 1;
+    Labels labels_composite = 2;
+  }
+}

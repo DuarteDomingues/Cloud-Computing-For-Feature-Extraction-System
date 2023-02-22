@@ -1,0 +1,15 @@
+================================= MENSAGENS ENVIADAS ENTRE AS DIFERENTES PARTES DO PROJETO =================================
+
+========= Server to PUB/SUB(Vision Worker) (depois da imagem ser armazenada na Cloud)
+
+Target topic = topicworkers
+Message(Id:<Random long> Data:<Img hash value>)
+Atributes :    {targetBucket=<bucket onde foi guardada a imagem>, 
+		identifier=<Img hash value>, 
+		filename=<filename na máquina de destino>
+		contentType=image/jpeg}
+
+========= Server (Vision Worker) to Server (Translation Worker) (depois de serem obtidos os labels)
+Target topic = labelTranslationworkers
+Message(Id:<Random long> Data:<Img hash value>)
+Atributes :    {label-<language>=[<Score do label>]} // 0 ou mais elementos na lista 

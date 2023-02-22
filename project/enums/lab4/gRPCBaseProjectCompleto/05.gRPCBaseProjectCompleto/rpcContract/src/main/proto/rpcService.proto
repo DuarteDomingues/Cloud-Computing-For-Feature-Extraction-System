@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+option java_multiple_files = true;
+option java_package = "rpcstubs";
+
+package baseservice; // package do proto
+
+// Os 4 casos de definição de serviço
+service BaseService {
+    rpc case1(Request) returns (Reply);
+    rpc case2 (Request) returns (stream Reply);
+    rpc case3(stream Request) returns (Reply);
+    rpc case4(stream Request) returns (stream Reply);
+
+    // Utilização de parâmetro e retorno Void
+    rpc pingServer(Void) returns (Reply);
+    rpc publishNews(News) returns (Void);
+}
+
+message Request {
+    int32 reqID = 1;
+    string txt = 2;
+}
+message Reply {
+    int32 rplyID = 1;
+    string txt = 2;
+
+}
+
+message Void {
+
+}
+
+message News {
+    google.protobuf.Timestamp ts =1;
+    string texto = 2;
+}

@@ -1,0 +1,5 @@
+https://lightrun.com/java/java-tutorial-java-command-line-arguments/ (Command Line args)
+
+https://cloud.google.com/vision/docs/samples/vision-label-detection-gcs // Vision interface
+
+https://firebase.google.com/docs/firestore/solutions/search // Pesquisa por nome do ficheiro

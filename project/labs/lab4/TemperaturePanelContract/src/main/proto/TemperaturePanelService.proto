@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+// each class is defined in each own file, inside a common package
+option java_multiple_files = true;
+option java_package = "TemperaturePanelService";
+
+package temperaturePanelService; // package do proto
+
+service TemperaturePanelService {
+  //server
+  rpc init(Local) returns (PanelID); //case 1
+  //cliente
+  rpc sendTemperatures(stream Temp) returns(Void); //case 3
+  //cliente
+  rpc getAllTemperatures(PanelID) returns (AllTemps); //case 2 porque alltemps é um repeatable
+  //server e cliente
+  rpc sendAlert(Alert) returns (Void); //case 1
+  //server
+  rpc registerForAlerts(PanelID) returns (stream Alert); //case 2
+}
+
+message Void {}
+message Local{
+  string msg = 1;
+}
+
+message PanelID{
+  int32 id = 1;
+}
+
+message Temp{
+  PanelID identifier = 1;
+  double temperature = 2;
+}
+
+message AllTemps{
+  PanelID panelID = 1;
+  repeated double temps = 2;
+}
+
+message Alert{
+  PanelID panelID = 1;
+  Local panelLocation = 2;
+  string text = 3;
+}
