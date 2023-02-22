@@ -7,8 +7,7 @@ Licenciatura Engenharia Informática e Multimédia - ISEL
 
 ---
 
-System that detects features, such as tree, street, night, fish 
-example, tree, street, night, fish in image files (PNG, JPC, etc.) and translate these features from 
+System that detects features, such as tree, street, night, fish in image files (PNG, JPC, etc.) and translate these features from 
 English to other languages such as Portuguese.
 
 The system features are available to client applications through a gRPC interface. 
